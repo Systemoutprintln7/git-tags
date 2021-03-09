@@ -6,7 +6,7 @@ name: server node - deploy beta
 
 on:
   push:
-    tags: ["*.*.*-beta", "*.*.*-alpha"]
+    tags: ["*.*.*-beta-test", "*.*.*-alpha"]
 
 
   # Allows you to run this workflow manually from the Actions tab
@@ -28,8 +28,15 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world! ${{ github.ref }} ${{ github.sha }}!
 
+      - name: Get the version
+        id: get_version
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          echo ::set-output name=SERVICE_NAME::${GITHUB_REF/refs\/tags\/*\-*-//}
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build, ${{ github.ref }} ${{ github.sha }}
           echo test, and deploy your project. ${{ github.ref##*- }} ${{ github.sha }}
+          echo ${{ steps.get_version.SERVICE_NAME }}
