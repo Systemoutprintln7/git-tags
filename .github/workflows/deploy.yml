@@ -38,5 +38,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build, ${{ github.ref }} ${{ github.sha }}
-          echo test, and deploy your project. ${{ github.ref##*- }} ${{ github.sha }}
+          echo test, and deploy your project. ${{ steps.get_version.SERVICE_NAME }} ${{ steps.get_version.VERSION }}
           echo ${{ steps.get_version.SERVICE_NAME }}
