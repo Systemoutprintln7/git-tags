@@ -49,3 +49,4 @@ jobs:
           echo $SERVICE_NAMES
           echo $PIPPO
           echo $PLUTO
+          echo ciao
